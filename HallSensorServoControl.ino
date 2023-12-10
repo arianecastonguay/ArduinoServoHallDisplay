@@ -7,8 +7,11 @@
 #define BUZZER_PIN 13
 #define SENSOR_READ_INTERVAL 80
 #define DISPLAY_UPDATE_INTERVAL 5
+#define BUZZER_ON_DURATION 100 
 #define NUM_SEGMENTS 8
 #define MAX_DISPLAY_VALUE 99
+#define THRESHOLD_BUZZER_VALUE 10
+
 
 const int segmentPins[NUM_SEGMENTS] = {2, 3, 4, 5, 6, 7, 8, 9};
 
@@ -55,6 +58,8 @@ void loop() {
   if (isTimeToUpdate(currentMillis, lastDisplayUpdateTime, DISPLAY_UPDATE_INTERVAL)) {
     updateDisplay(displayValue);
   }
+
+  controlBuzzer(displayValue);
 }
 
 void initializeDisplayPins() {
@@ -94,6 +99,23 @@ void updateDisplay(int number) {
   setSegments(numberPatterns[digitToShow]);
   digitalWrite(DIGIT1_COMMON_PIN, displayingFirstDigit ? LOW : HIGH);
   digitalWrite(DIGIT2_COMMON_PIN, displayingFirstDigit ? HIGH : LOW);
+}
+
+// Function to control the buzzer
+void controlBuzzer(int displayValue) {
+  static unsigned long buzzerStartTime = 0;
+  static bool isBuzzerActive = false;
+
+  if (displayValue > THRESHOLD_BUZZER_VALUE && !isBuzzerActive) {
+    digitalWrite(BUZZER_PIN, HIGH); // Turn on the buzzer
+    buzzerStartTime = millis();
+    isBuzzerActive = true;
+  }
+
+  if (isBuzzerActive && (millis() - buzzerStartTime > BUZZER_ON_DURATION)) {
+    digitalWrite(BUZZER_PIN, LOW); // Turn off the buzzer
+    isBuzzerActive = false;
+  }
 }
 
 void setSegments(byte segments) {
