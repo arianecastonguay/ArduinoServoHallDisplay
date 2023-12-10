@@ -25,6 +25,7 @@ The ServoHallDisplay project is an Arduino-based system that uses a Hall effect 
 - **Servo Pin**: 12
 - **Buzzer Pin**: 13
 
+
 ## Setup Instructions
 1. Connect the Hall sensor, servo motor, 7-segment display, and buzzer to the Arduino according to the pin configuration.
 2. Upload the provided `.ino` file to the Arduino.
@@ -40,5 +41,32 @@ The code is structured into several key functions:
 - `isTimeToUpdate()`: Checks if it's time to update the sensor reading or display.
 - `controlBuzzer()`: Handles buzzer activation based on display values.
 
-## Contributing
-Feel free to fork this repository and contribute to its development. Any improvements or feature additions are welcome!
+## Circuit Design and Display Information
+
+### 7-Segment LED Display
+The project utilizes a common-cathode 7-segment LED display to show the numeric values. The pin layout for the 7-segment display is as follows:
+
+- **Pin 1**: Segment E
+- **Pin 2**: Segment D
+- **Pin 3**: Common Cathode (Ground)
+- **Pin 4**: Segment C
+- **Pin 5**: Segment DP (Decimal Point)
+- **Pin 6**: Segment B
+- **Pin 7**: Segment A
+- **Pin 8**: Common Cathode (Ground)
+- **Pin 9**: Segment G
+- **Pin 10**: Segment F
+
+### Connecting the Display
+- Connect pins 3 and 8 of the 7-segment display to the ground on the Arduino.
+- Connect the remaining segment pins (1, 2, 4, 5, 6, 7, 9, 10) to the corresponding Arduino pins defined in the `segmentPins` array. Make sure to use current-limiting resistors in series with each segment to prevent damage to the LEDs.
+- The decimal point (DP) is typically not used in this project, but you can connect it if needed, remembering to include a current-limiting resistor.
+
+### Circuit Assembly
+- The servo motor's control wire should be connected to `SERVO_PIN` on the Arduino, and the power and ground wires should be connected to the appropriate power supply, ensuring that it can provide sufficient current.
+- The Hall effect sensor's output should be connected to `HALL_SENSOR_PIN` (A0), with the sensor's power and ground appropriately connected.
+- If included, the buzzer should have one pin connected to `BUZZER_PIN` (13) and the other to the ground.
+
+Always ensure that your circuit is powered off while making connections to prevent any damage.
+
+For a detailed schematic, please refer to the circuit diagrams provided within the repository.
