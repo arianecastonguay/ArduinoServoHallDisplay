@@ -44,6 +44,8 @@ The code is structured into several key functions:
 ## Circuit Design and Display Information
 
 ### 7-Segment LED Display
+![7-Segment LED Pin Layout](7segments_led.png)
+
 The project utilizes a common-cathode 7-segment LED display to show the numeric values. The pin layout for the 7-segment display is as follows:
 
 - **Pin 1**: Segment E
