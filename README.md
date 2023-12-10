@@ -25,7 +25,6 @@ The ServoHallDisplay project is an Arduino-based system that uses a Hall effect 
 - **Servo Pin**: 12
 - **Buzzer Pin**: 13
 
-
 ## Setup Instructions
 1. Connect the Hall sensor, servo motor, 7-segment display, and buzzer to the Arduino according to the pin configuration.
 2. Upload the provided `.ino` file to the Arduino.
@@ -43,11 +42,15 @@ The code is structured into several key functions:
 
 ## Circuit Design and Display Information
 
+Below is the circuit diagram for the project:
+
+![Circuit Diagram](circuit_diagram.png)
+
 ### 7-Segment LED Display
 
 The project utilizes a common-cathode 7-segment LED display to show the numeric values. The pin layout for the 7-segment display is as follows:
 
-<img src="7segments_led.png" alt="7-Segment LED Pin Layout" width="25%"/>
+![7-Segment LED Pin Layout](7segments_led.png)
 
 - **Pin 1**: Segment E
 - **Pin 2**: Segment D
